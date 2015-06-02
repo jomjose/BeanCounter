@@ -1,0 +1,122 @@
+﻿<div class="row">
+
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                Categories
+            </header>
+            <div class="input-group margin10">
+                <input id="txtCategory" type="text" class="form-control" placeholder="Add New category">
+                <span class="input-group-btn">
+                    <button id="btnAddOrUpdateCategory" class="btn btn-default" type="button">
+                        <span id="spnAddOrUpdate" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                    <button id="btnCancelCategory" class="btn btn-default hide" type="button">
+                        <span  class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                </span>
+            </div>
+            <div class="panel-body table-responsive fixed-table">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Expense Category</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="categoryContainer">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ExpenseCategoryId</td>
+                                <td>@item.ExpenseCategory</td>
+                                <td>
+                                    <button data-categoryid=@item.ExpenseCategoryId data-category="@item.ExpenseCategory" class="btn btn-default btnUpdateCategory" type="button" title="Update">
+                                        <span  class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                    </button>
+                                    <button data-categoryid=@item.ExpenseCategoryId class="btn btn-default btnDeleteCategory" type="button" title="Delete">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+              Bank
+            </header>
+            <div class="input-group margin10">
+                <input id="txtBank" type="text" class="form-control" placeholder="Add New category">
+                <span class="input-group-btn">
+                    <button id="btnAddOrUpdateBank" class="btn btn-default" type="button">
+                        <span id="spnAddOrUpdateBank" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                    <button id="btnCancelBank" class="btn btn-default hide" type="button">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                </span>
+            </div>
+            <div class="panel-body table-responsive fixed-table">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Bank</th>
+                            <th>AccountNumber</th>
+                            <th>Branch</th>
+                            <th>IFSCCode</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bankContainer">
+                        @*@foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ExpenseCategoryId</td>
+                                <td>@item.ExpenseCategory</td>
+                                <td>
+                                    <button data-categoryid=@item.ExpenseCategoryId data-category="@item.ExpenseCategory" class="btn btn-default btnUpdateBank" type="button" title="Update">
+                                        <span  class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                    </button>
+                                    <button data-categoryid=@item.ExpenseCategoryId class="btn btn-default btnDeleteBank" type="button" title="Delete">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        }*@
+                    </tbody>
+
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script id="tmpltCategory" type="text/html">
+    <tr>
+        <td>${ExpenseCategoryId}</td>
+        <td>${ExpenseCategory}</td>
+        <td>
+            <button data-categoryid=${ExpenseCategoryId} data-category="${ExpenseCategory}" class="btn btn-default btnUpdateCategory" type="button" title="Update">
+                <span id="spnAddOrUpdate" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+            </button>
+            <button data-categoryid=${ExpenseCategoryId} class="btn btn-default btnDeleteCategory" type="button" title="Delete">
+                <span id="spnAddOrUpdate" class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+        </td>
+    </tr>
+</script>
+<script src="~/Scripts/BeanCounter/controlPanel.js"></script>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
