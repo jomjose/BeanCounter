@@ -51,7 +51,6 @@
     <Compile Include="Abstract\IAccoutRepository.cs" />
     <Compile Include="Abstract\IAddExpenses.cs" />
     <Compile Include="Abstract\IBankRepository.cs" />
-    <Compile Include="Helpers\DbConnector.cs" />
     <Compile Include="Concrete\EFAccountRepository.cs" />
     <Compile Include="Concrete\EFBankrepository.cs" />
     <Compile Include="Concrete\EFCategoryRepository.cs" />

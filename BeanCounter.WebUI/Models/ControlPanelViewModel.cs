@@ -52,43 +52,6 @@ namespace BeanCounter.WebUI.Models
 
         #endregion Category
 
-        #region Bank
-
-        public static IEnumerable<Bank> GetAllCategories()
-        {
-            var resolver = IoCResolver.Resolve<IAddExpenses>();
-            var banks = resolver.GetCategories();
-            IoCResolver.Release(resolver);
-            return banks;
-        }
-
-        public static Bank AddNewBank(Bank bank)
-        {
-
-                var resolver = IoCResolver.Resolve<IAddExpenses>();
-                bank = resolver.AddBank(bank);
-                IoCResolver.Release(resolver);
-                return bank;
-
-            return null;
-        }
-
-        public static int UpdateBank(Bank Bank)
-        {
-            var resolver = IoCResolver.Resolve<IAddExpenses>();
-            var result = resolver.UpdateBank(Bank);
-            IoCResolver.Release(resolver);
-            return result;
-        }
-
-        public static bool DeleteBank(int id)
-        {
-            var resolver = IoCResolver.Resolve<IAddExpenses>();
-            var isDeleted = resolver.DeleteBank(id);
-            IoCResolver.Release(resolver);
-            return isDeleted;
-        }
-
-        #endregion
+   
     }
 }

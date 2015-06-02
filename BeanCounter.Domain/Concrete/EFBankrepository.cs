@@ -11,11 +11,12 @@ namespace BeanCounter.Domain.Concrete
 {
     public class EFBankrepository : IBankRepository
     {
+        private EFDbBeanCounterContext context = new EFDbBeanCounterContext();
         public IEnumerable<Bank> GetCategories()
         {
             try
             {
-                return DbConnector.context.Bank.ToList();
+                return context.Bank.ToList();
             }
             catch
             {
@@ -28,8 +29,8 @@ namespace BeanCounter.Domain.Concrete
             try
             {
 
-                DbConnector.context.Bank.Add(bank);
-                DbConnector.context.SaveChanges();
+                context.Bank.Add(bank);
+                context.SaveChanges();
 
                 return bank;
             }
@@ -45,9 +46,9 @@ namespace BeanCounter.Domain.Concrete
             try
             {
 
-                var existingBank = DbConnector.context.Bank.FirstOrDefault(x => x.Id == bank.Id);
+                var existingBank = context.Bank.FirstOrDefault(x => x.Id == bank.Id);
                 existingBank = bank;
-                DbConnector.context.SaveChanges();
+                context.SaveChanges();
                 return 1;
             }
             catch
@@ -61,9 +62,9 @@ namespace BeanCounter.Domain.Concrete
         {
             try
             {
-                var existingBank = DbConnector.context.Bank.FirstOrDefault(x => x.Id == id);
-                DbConnector.context.Bank.Remove(existingBank);
-                DbConnector.context.SaveChanges();
+                var existingBank = context.Bank.FirstOrDefault(x => x.Id == id);
+                context.Bank.Remove(existingBank);
+                context.SaveChanges();
                 return true;
             }
             catch

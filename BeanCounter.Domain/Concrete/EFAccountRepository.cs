@@ -8,15 +8,16 @@ namespace BeanCounter.Domain.Concrete
 {
     public class EFAccountRepository : IAccoutRepository
     {
+        private EFDbBeanCounterContext context = new EFDbBeanCounterContext();
         public User GetUser(User user)
         {
             user.Password = Security.EncryptPassword(user.Password);
-            var existingUser=DbConnector.context.User.FirstOrDefault(x => x.UserName == user.UserName && x.Password == user.Password);
+            var existingUser=context.User.FirstOrDefault(x => x.UserName == user.UserName && x.Password == user.Password);
             return existingUser;
         }
         public Profile GetProfile(int userId)
         {
-            return DbConnector.context.Profile.FirstOrDefault(x => x.UserId == userId);
+            return context.Profile.FirstOrDefault(x => x.UserId == userId);
         }
 
         public int CreateUser(User user)
@@ -24,8 +25,8 @@ namespace BeanCounter.Domain.Concrete
             try
             {
                 user.Password = Security.EncryptPassword(user.Password);
-                DbConnector.context.User.Add(user);
-                DbConnector.context.SaveChanges();
+                context.User.Add(user);
+                context.SaveChanges();
                 return user.UserId;
             }
             catch
@@ -38,8 +39,8 @@ namespace BeanCounter.Domain.Concrete
         {
             try
             {
-                DbConnector.context.Profile.Add(profile);
-                DbConnector.context.SaveChanges();
+                context.Profile.Add(profile);
+                context.SaveChanges();
                 return true;
             }
             catch
@@ -51,11 +52,11 @@ namespace BeanCounter.Domain.Concrete
         {
             try
             {
-                var existingUser = DbConnector.context.User.FirstOrDefault(x => x.UserId == user.UserId);
+                var existingUser = context.User.FirstOrDefault(x => x.UserId == user.UserId);
                 if (existingUser != null)
                 {
                     existingUser.Password = user.Password;
-                    DbConnector.context.SaveChanges();
+                    context.SaveChanges();
                 }
                 return false;
 
@@ -69,13 +70,13 @@ namespace BeanCounter.Domain.Concrete
         {
             try
             {
-                var existingProfile = DbConnector.context.Profile.FirstOrDefault(x => x.UserId == profile.UserId);
+                var existingProfile = context.Profile.FirstOrDefault(x => x.UserId == profile.UserId);
                 if(existingProfile!=null)
                 {
                     existingProfile.FirstName = profile.FirstName;
                     existingProfile.LastName = profile.LastName;
                     existingProfile.Email = profile.Email;
-                    DbConnector.context.SaveChanges();
+                    context.SaveChanges();
                 }
                 return true;
             }

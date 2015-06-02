@@ -45,24 +45,6 @@ namespace BeanCounter.WebUI.Controllers
         #endregion
 
 
-        #region Bank
-        [HttpPost]
-        public JsonResult AddNewBank(Bank Bank)
-        {
-            return Json(ControlPanelViewModel.AddNewBank(Bank));
-        }
 
-        [HttpPost]
-        public JsonResult UpdateBank(Bank Bank)
-        {
-            return Json(ControlPanelViewModel.UpdateBank(Bank));
-        }
-
-        [HttpPost]
-        public JsonResult DeleteBank(Bank Bank)
-        {
-            return Json(ControlPanelViewModel.DeleteBank(Bank.Id));
-        } 
-        #endregion
     }
 }

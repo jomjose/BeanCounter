@@ -11,12 +11,13 @@ namespace BeanCounter.Domain.Concrete
 {
     public class EFCategoryRepository:IAddExpenses
     {
+        private EFDbBeanCounterContext context = new EFDbBeanCounterContext();
 
         public IEnumerable<Category> GetCategories()
         {
             try
             {
-                return DbConnector.context.Category.ToList();
+                return context.Category.ToList();
             }
             catch
             {
@@ -28,11 +29,11 @@ namespace BeanCounter.Domain.Concrete
         {
             try
             {
-                var existingCategory = DbConnector.context.Category.FirstOrDefault(x => x.ExpenseCategory == category.ExpenseCategory);
+                var existingCategory = context.Category.FirstOrDefault(x => x.ExpenseCategory == category.ExpenseCategory);
                 if (existingCategory == null)
                 {
-                    DbConnector.context.Category.Add(category);
-                    DbConnector.context.SaveChanges();
+                    context.Category.Add(category);
+                    context.SaveChanges();
                     return category;
                 }
                 category.ExpenseCategoryId = -1;
@@ -50,12 +51,12 @@ namespace BeanCounter.Domain.Concrete
             try
             {
 
-                var existingCategory = DbConnector.context.Category.FirstOrDefault(x => x.ExpenseCategory == category.ExpenseCategory);
+                var existingCategory = context.Category.FirstOrDefault(x => x.ExpenseCategory == category.ExpenseCategory);
                 if (existingCategory == null)
                 {
-                    existingCategory = DbConnector.context.Category.FirstOrDefault(x => x.ExpenseCategoryId == category.ExpenseCategoryId);
+                    existingCategory = context.Category.FirstOrDefault(x => x.ExpenseCategoryId == category.ExpenseCategoryId);
                     existingCategory.ExpenseCategory = category.ExpenseCategory;
-                    DbConnector.context.SaveChanges();
+                    context.SaveChanges();
                     return 1;
                 }
                 return 0;
@@ -73,9 +74,9 @@ namespace BeanCounter.Domain.Concrete
         {
             try
             {
-                var existingCategory = DbConnector.context.Category.FirstOrDefault(x => x.ExpenseCategoryId == id);
-                DbConnector.context.Category.Remove(existingCategory);
-                DbConnector.context.SaveChanges();
+                var existingCategory = context.Category.FirstOrDefault(x => x.ExpenseCategoryId == id);
+                context.Category.Remove(existingCategory);
+                context.SaveChanges();
                 return true;
             }
             catch
